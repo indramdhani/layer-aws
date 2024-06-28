@@ -1,0 +1,22 @@
+{
+  "name": "layer-aws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "commit": "git cz",
+    "sam:deploy:live": "sam build --config-env prod && sam deploy --config-env prod",
+    "sam:deploy:dev": "sam build --config-env dev && sam deploy --config-env dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "commitizen": "^4.3.0",
+    "git-cz": "^4.9.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/git-cz"
+    }
+  }
+}

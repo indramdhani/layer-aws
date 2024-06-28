@@ -1,0 +1,67 @@
+version = 0.1
+[prod]
+[prod.deploy]
+[prod.deploy.parameters]
+stack_name = 'notion'
+s3_bucket = 'indramdhani-lambda-layers'
+s3_prefix = 'notion'
+region = 'ap-southeast-1'
+capabilities = "CAPABILITY_IAM"
+confirm_changeset = true
+parameter_overrides="Environment=\"prod\""
+
+[prod.build]
+[prod.build.parameters]
+cached=true
+parallel=true
+use_container=true
+parameter_overrides="Environment=\"prod\""
+
+[dev]
+[dev.deploy]
+[dev.deploy.parameters]
+stack_name = 'notion-dev'
+s3_bucket = 'indramdhani-lambda-layers'
+s3_prefix = 'notion-dev'
+region = 'ap-southeast-1'
+capabilities = "CAPABILITY_IAM"
+confirm_changeset = false
+parameter_overrides="Environment=\"dev\""
+
+[dev.build]
+[dev.build.parameters]
+cached=true
+parallel=true
+use_container=true
+parameter_overrides="Environment=\"dev\""
+
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "notion-local"
+s3_bucket = "indramdhani-lambda-layers"
+s3_prefix = "notion-local"
+region = "ap-southeast-1"
+capabilities = "CAPABILITY_IAM"
+confirm_changeset= false
+parameter_overrides="Environment=\"local\""
+
+[default.build]
+[default.build.parameters]
+cached=true
+parallel=true
+use_container=false
+parameter_overrides="Environment=\"local\""
+skip-pull-image=true
+
+[default.local_start_api]
+[default.local_start_api.parameters]
+env_vars="env.json"
+docker_network="lambda-local"
+parameter_overrides="Environment=\"local\""
+
+[default.local_invoke]
+[default.local_invoke.parameters]
+env_vars="env.json"
+docker_network="lambda-local"
+parameter_overrides="Environment=\"local\""

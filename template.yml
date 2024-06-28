@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  lambda layer for notion
+
+Transform:
+  - AWS::Serverless-2016-10-31
+
+Parameters:
+  Environment:
+    Type: String
+    Default: local
+    AllowedValues:
+      - prod
+      - dev
+      - local
+Mappings:
+  VarPerStack:
+    prod:
+      'Name': 'notion'
+    dev:
+      'Name': 'notion-dev'
+    local:
+      'Name': 'notion-local'
+
+Resources:
+  notionLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !FindInMap [VarPerStack, !Ref 'Environment', Name]
+      Description: lambda layer contains notion package
+      CompatibleArchitectures:
+        - arm64
+        - x86_64
+      CompatibleRuntimes:
+        - nodejs14.x
+        - nodejs12.x
+      ContentUri: ./layer
+      RetentionPolicy: Retain
+      LicenseInfo: MIT
+
+Outputs:
+  Layer:
+    Description: 'Layer Arn'
+    Value: !Ref notionLayer
