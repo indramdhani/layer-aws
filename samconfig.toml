@@ -2,9 +2,9 @@ version = 0.1
 [prod]
 [prod.deploy]
 [prod.deploy.parameters]
-stack_name = 'notion'
+stack_name = 'aws-layer'
 s3_bucket = 'indramdhani-lambda-layers'
-s3_prefix = 'notion'
+s3_prefix = 'aws-layer'
 region = 'ap-southeast-1'
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
@@ -20,9 +20,9 @@ parameter_overrides="Environment=\"prod\""
 [dev]
 [dev.deploy]
 [dev.deploy.parameters]
-stack_name = 'notion-dev'
+stack_name = 'aws-layer-dev'
 s3_bucket = 'indramdhani-lambda-layers'
-s3_prefix = 'notion-dev'
+s3_prefix = 'aws-layer-dev'
 region = 'ap-southeast-1'
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = false
@@ -38,9 +38,9 @@ parameter_overrides="Environment=\"dev\""
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "notion-local"
+stack_name = "aws-layer-local"
 s3_bucket = "indramdhani-lambda-layers"
-s3_prefix = "notion-local"
+s3_prefix = "aws-layer-local"
 region = "ap-southeast-1"
 capabilities = "CAPABILITY_IAM"
 confirm_changeset= false

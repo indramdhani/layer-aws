@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
-  lambda layer for notion
+  lambda layer for aws-layer
 
 Transform:
   - AWS::Serverless-2016-10-31
@@ -16,22 +16,25 @@ Parameters:
 Mappings:
   VarPerStack:
     prod:
-      'Name': 'notion'
+      'Name': 'aws-layer'
     dev:
-      'Name': 'notion-dev'
+      'Name': 'aws-layer-dev'
     local:
-      'Name': 'notion-local'
+      'Name': 'aws-layer-local'
 
 Resources:
-  notionLayer:
+  awsLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:
       LayerName: !FindInMap [VarPerStack, !Ref 'Environment', Name]
-      Description: lambda layer contains notion package
+      Description: lambda layer contains aws-layer package
       CompatibleArchitectures:
         - arm64
         - x86_64
       CompatibleRuntimes:
+        - nodejs20.x
+        - nodejs18.x
+        - nodejs16.x
         - nodejs14.x
         - nodejs12.x
       ContentUri: ./layer
@@ -41,4 +44,4 @@ Resources:
 Outputs:
   Layer:
     Description: 'Layer Arn'
-    Value: !Ref notionLayer
+    Value: !Ref awsLayer
